@@ -53,7 +53,6 @@ function myRepofunction(params) {
         .then(list => {
             for (let i = 0; i < list.items.length; i++) {
                 let full_name = document.createElement('li');
-                console.log(full_name.textContent = list.items[i].full_name);
                 currentUl.appendChild(full_name);
             }
         })
@@ -77,41 +76,21 @@ function search() {
     }
 }
 
-function myTablerepo(toTable = [
-    'gel polish',     '$270',
-    'reg polish',     '$135',
-    'nail file',      '$30'
-]) {
-    let myTable = document.getElementById('table'),
-        tr1 = document.createElement('tr'),
-        tr2 = document.createElement('tr'),
-        tr3 = document.createElement('tr'),
-        td1 = document.createElement('td'),
-        td2 = document.createElement('td'),
-        td3 = document.createElement('td'),
-        td4 = document.createElement('td'),
-        td5 = document.createElement('td'),
-        td6 = document.createElement('td');
-
-    td1 = document.createTextNode(toTable[0] + ' ');
-    td2 = document.createTextNode(toTable[1]);
-
-    tr1.appendChild(td1);
-    tr1.appendChild(td2);
-
-    td3 = document.createTextNode(toTable[2] + ' ');
-    td4 = document.createTextNode(toTable[3]);
-
-    tr2.appendChild(td3);
-    tr2.appendChild(td4);
-
-    td5 = document.createTextNode(toTable[4] + ' ');
-    td6 = document.createTextNode(toTable[5]);
-
-    tr3.appendChild(td5);
-    tr3.appendChild(td6);
-
-    myTable.appendChild(tr1);
-    myTable.appendChild(tr2);
-    myTable.appendChild(tr3);
+function genera_tabla() {
+  var body = document.getElementsByTagName('body')[0];
+  var tabla   = document.createElement('table');
+  var tblBody = document.createElement('tbody');
+  for (var i = 0; i < 2; i++) {
+    var hilera = document.createElement('tr');
+    for (var j = 0; j < 2; j++) {
+      var celda = document.createElement('td');
+      var textoCelda = document.createTextNode('gel polish');
+      celda.appendChild(textoCelda);
+      hilera.appendChild(celda);
+    }
+    tblBody.appendChild(hilera);
+  }
+  tabla.appendChild(tblBody);
+  body.appendChild(tabla);
+  tabla.setAttribute('border', '2');
 }
