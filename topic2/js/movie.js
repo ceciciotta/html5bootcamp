@@ -10,7 +10,7 @@ export class Movie extends EventEmitter {
     }
 
     play() {
-        super.emit('play');
+        this.emit('play');
     }
 
     pause() {
