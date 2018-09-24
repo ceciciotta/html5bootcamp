@@ -61,13 +61,28 @@ function myRepofunction(params) {
         })
 }
 
+function search() {
+    let input = document.getElementById('text_search').value.toLowerCase(),
+        output = document.getElementById('id_texts').options;
+
+    for (let i = 0; i < output.length; i++) {
+        if (output[i].value.indexOf(input) == 0) {
+            output[i].selected = true;
+        }
+
+        if (document.forms[0].text_search.value == '') {
+            output[0].selected = true;
+        }
+    }
+}
+
 function genera_tabla() {
   var body = document.getElementsByTagName('body')[0];
   var tabla   = document.createElement('table');
   var tblBody = document.createElement('tbody');
   for (var i = 0; i < tblBody.lenght ; i++) {
     var hilera = document.createElement('tr');
-    for (var j = 0; j < hilera.lenght ; j++) {
+    for (var j = 0; j < output.lenght ; j++) {
       var celda = document.createElement('td');
       var textoCelda = document.createTextNode('gel polish');
       var textoCelda = document.createTextNode('regular polish');
