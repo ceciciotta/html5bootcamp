@@ -80,12 +80,11 @@ function genera_tabla() {
   var body = document.getElementsByTagName('body')[0];
   var tabla   = document.createElement('table');
   var tblBody = document.createElement('tbody');
-  for (var i = 0; i < tblBody.lenght ; i++) {
+  for (var i = 0; i < 4 ; i++) {
     var hilera = document.createElement('tr');
-    for (var j = 0; j < output.lenght ; j++) {
+    for (var j = 0; j < 6 ; j++) {
       var celda = document.createElement('td');
-      var textoCelda = document.createTextNode('gel polish');
-      var textoCelda = document.createTextNode('regular polish');
+      var textoCelda = document.createTextNode(j + 1);
       celda.appendChild(textoCelda);
       hilera.appendChild(celda);
     }
