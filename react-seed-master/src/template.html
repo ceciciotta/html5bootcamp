@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>React Seed</title>
+</head>
+<body>
+  <main class="main-container">
+    <section>
+      <div class="form">
+        <form action="">
+          <input type="search" value="muse,ghosts">
+          <input type="sumbit" value= "Create">
+        </form>
+    </div>
+    <div class="playlist">
+      <div class="loader">
+        <div class="inner-circle"></div>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+    const app ={};
+
+    app.apiUrl= 'https://api.spotify.com/v1/';
+
+app.events = function() {
+  $('form').on('sumbit', function() {
+    e.preventDefault();
+    $('.loading').toggleClass('show');
+    let artists = $('input[type=search]').val();
+    artists = artists.split(',');
+    let search = artists.map(artistName => app.SearchArtist(artistName));
+
+    app.retreiveArtistInfo(search);
+       });
+  });
+};
+
+app.SearchArtist = (artistName) => $.ajax({
+  url: `${app.apiUrl}/search`,
+  method='GET',
+  dataType: 'json',
+  data: {
+    q:artistName,
+    type:'artist',
+  }
+});
+
+app.getArtistsAlbum = (artistId) => $.ajax({
+  url: `${app.apiUrl}/artists/${artistsId}/albums`,
+  method: 'GET',
+  dataType: 'json',
+  data: {
+    album.type:'album'
+  }
+})
+
+//Then the tracks
+app.getArtistsTracks = (id) => $.ajax({
+  url: `${app.apiUrl}/albums/${id}/tracks`;
+  method: 'GET',
+  dataType: 'json'
+});
+
+};
+
+app.buildPlayList = function(tracks) {
+  $.when(...tracks)
+  .then((...tracksResults) => {
+    tracksResults = tracksResults.map(getFirstElement)
+      .map(item => items.items);
+      .reduce(flatten,[]);
+    const randomTrachs = [];
+    for(let i = 0; i< 30; i++) {
+      randomTracks.push(getRandomTrack(tracksResults));
+    }
+    randomTracks.join();
+    const baseUrl = `https://embed.spotify.com/?theme=white&uri=spotify:trackset:My playlist:${
+      randomTracks.join()}`;
+
+    $('loading').toggleClass('show');
+
+    $('playlist').html(`<iframe src="${baseUrl}" height="400"></iframe>`);
+
+  });
+};
+
+app.retreiveArtistInfo = function() {
+     $.when(...search)
+         .then((...results) => {
+           results = results.map(getFirstElement)
+             .map(res => res.artists.items[0].id)
+             .map(id => app.getArtistAlbums(id));
+
+             app.getArtistTracks(results);
+         });
+};
+
+app.retreiveArtistTracks = function(artistAlbums) {
+  $.when(...artistAlbums)
+  .then((...albums) => {
+    albums = albums.map(getFirstElement)
+    .map(res=> res.items);
+    .reduce(flatten,[])
+    .map(album => album.id)
+    .map(ids => app.getArtistTracks(ids));
+    app.buildPlayList(albumIds);
+  });
+}
+
+const getFirstElement = (item) => item[0];
+
+const flatten = (prev,curr) => [...prev, ...curr];
+
+const getRandomTrack = (trackarray) => {
+  const randoNum =Math.floor(Math.random() * trackArray.lenght);
+  return trackArray[randoNum];
+
+    app.init = function() {
+     app.events();
+    };
+
+    $(app.init);
+</script>
+
+<div id="app"></div>
+
+</body>
+</html>
